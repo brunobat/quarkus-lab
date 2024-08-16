@@ -12,5 +12,6 @@
     <modules>
         <module>otel-metrics-docs</module>
         <module>otel-metrics</module>
+        <module>otel-aws</module>
     </modules>
 </project>
