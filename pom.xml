@@ -14,6 +14,7 @@
         <module>otel-metrics</module>
         <module>otel-metrics-lgtm</module>
         <module>otel-aws</module>
+        <module>otel-aws-rosa</module>
         <module>otel-logs</module>
     </modules>
 </project>
