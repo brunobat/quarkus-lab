@@ -16,5 +16,6 @@
         <module>otel-aws</module>
         <module>otel-aws-rosa</module>
         <module>otel-logs</module>
+        <module>micrometer-lgtm</module>
     </modules>
 </project>
