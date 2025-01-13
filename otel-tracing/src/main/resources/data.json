@@ -1,0 +1,66 @@
+{
+  "metric": "ImmutableMetricData",
+  "resource": {
+    "Resource": {
+      "schemaUrl": null,
+      "attributes": {
+        "host.name": "bbaptist-mac",
+        "service.name": "myservice ",
+        "service.version": "1.0.0-SNAPSHOT",
+        "telemetry.sdk.language": "java",
+        "telemetry.sdk.name": "opentelemetry",
+        "telemetry.sdk.version": "1.32.0",
+        "webengine.name": "Quarkus",
+        "webengine.version": "999-SNAPSHOT"
+      }
+    },
+    "instrumentationScopeInfo": {
+      "InstrumentationScopeInfo": {
+        "name": "io.quarkus.opentelemetry",
+        "version": null,
+        "schemaUrl": null,
+        "attributes": {}
+      }
+    },
+    "name": "hello-metrics",
+    "description": "hello-metrics",
+    "unit": "invocations",
+    "type": "LONG_SUM",
+    "data": {
+      "ImmutableSumData": {
+        "points": [
+          {
+            "ImmutableLongPointData": {
+              "startEpochNanos": 1720622136612378000,
+              "epochNanos": 1720622246618331000,
+              "attributes": {},
+              "value": 3,
+              "exemplars": [
+                {
+                  "ImmutableLongExemplarData": {
+                    "filteredAttributes": {},
+                    "epochNanos": 1720622239362357000,
+                    "spanContext": {
+                      "ImmutableSpanContext": {
+                        "traceId": "d91951e50b0641552a76889c5356467c",
+                        "spanId": "168af8b7102d0556",
+                        "traceFlags": "01",
+                        "traceState": "ArrayBasedTraceState",
+                        "entries": [],
+                        "remote": false,
+                        "valid": true
+                      },
+                      "value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "monotonic": true,
+        "aggregationTemporality": "CUMULATIVE"
+      }
+    }
+  }
+}

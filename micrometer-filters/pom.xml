@@ -9,8 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>otel-metrics-lgtm</artifactId>
-    <name>otel-metrics-lgtm</name>
+    <artifactId>micrometer-filters</artifactId>
+    <name>micrometer-filters</name>
 
     <properties>
         <compiler-plugin.version>3.12.1</compiler-plugin.version>
@@ -19,8 +19,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-        <quarkus.platform.version>3.17.4</quarkus.platform.version>
-<!--        <quarkus.platform.version>999-SNAPSHOT</quarkus.platform.version>-->
+<!--        <quarkus.platform.version>3.13.2</quarkus.platform.version>-->
+        <quarkus.platform.version>999-SNAPSHOT</quarkus.platform.version>
+        <quarkus-micrometer-registry-otlp.version>3.2.4</quarkus-micrometer-registry-otlp.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.2.5</surefire-plugin.version>
     </properties>
@@ -46,14 +47,15 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-jackson</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkiverse.micrometer.registry</groupId>-->
+<!--            <artifactId>quarkus-micrometer-registry-otlp</artifactId>-->
+<!--            <version>${quarkus-micrometer-registry-otlp.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-opentelemetry</artifactId>
+            <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.opentelemetry</groupId>-->
-<!--            <artifactId>opentelemetry-exporter-logging</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>

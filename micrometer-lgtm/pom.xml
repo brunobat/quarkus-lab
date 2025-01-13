@@ -19,7 +19,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-<!--        <quarkus.platform.version>3.13.2</quarkus.platform.version>-->
+<!--        <quarkus.platform.version>3.17.4</quarkus.platform.version>-->
         <quarkus.platform.version>999-SNAPSHOT</quarkus.platform.version>
         <quarkus-micrometer-registry-otlp.version>3.2.4</quarkus-micrometer-registry-otlp.version>
         <skipITs>true</skipITs>
@@ -47,19 +47,19 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-jackson</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkiverse.micrometer.registry</groupId>-->
+<!--            <artifactId>quarkus-micrometer-registry-otlp</artifactId>-->
+<!--            <version>${quarkus-micrometer-registry-otlp.version}</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>io.quarkiverse.micrometer.registry</groupId>
-            <artifactId>quarkus-micrometer-registry-otlp</artifactId>
-            <version>${quarkus-micrometer-registry-otlp.version}</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-opentelemetry</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.opentelemetry</groupId>-->
-<!--            <artifactId>opentelemetry-exporter-logging</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-opentelemetry</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
