@@ -19,5 +19,6 @@
         <module>micrometer-lgtm</module>
         <module>micrometer-filters</module>
         <module>otel-tracing</module>
+        <module>micrometer-otel</module>
     </modules>
 </project>
