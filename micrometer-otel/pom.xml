@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>otel-tracing</artifactId>
+    <artifactId>micrometer-otel</artifactId>
     <name>otel-tracing</name>
 
     <properties>
