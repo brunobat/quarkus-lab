@@ -1,20 +1,16 @@
 package org.acme;
 
-import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
-import io.opentelemetry.context.Scope;
-import jakarta.inject.Inject;
+import io.quarkus.logging.Log;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.context.ManagedExecutor;
-import org.jboss.logging.Logger;
 
 @Path("/hello")
 public class HelloResource {
 
-    private static final Logger LOG = Logger.getLogger(HelloResource.class);
     private final Tracer tracer;
 
     public HelloResource(Tracer tracer,   ManagedExecutor executor) {
@@ -44,7 +40,7 @@ public class HelloResource {
 //            span.end();
 //        }
 
-        LOG.info("hello-tracing");
+        Log.info("hello-tracing");
         return "Hello from Quarkus REST";
     }
 }
