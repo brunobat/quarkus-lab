@@ -23,5 +23,6 @@
         <module>otel-tracing</module>
         <module>micrometer-otel</module>
         <module>otel-fault-tolerance</module>
+        <module>micrometer-otel-langchain4j</module>
     </modules>
 </project>
