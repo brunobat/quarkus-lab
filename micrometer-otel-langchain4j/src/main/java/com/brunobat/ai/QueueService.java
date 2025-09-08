@@ -1,6 +1,5 @@
 package com.brunobat.ai;
 
-import com.brunobat.ai.common.Assistant;
 import io.micrometer.core.instrument.MeterRegistry;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
