@@ -20,7 +20,7 @@ public class QueueService {
     private final Queue<Message> promptQueue = new ConcurrentLinkedQueue<>();
 
     private final MeterRegistry registry;
-    private final Assistant assistant;
+    private final ChatService chatService;
 
     private Counter processedCounter;
     MeterProvider<Counter> charsCount;
@@ -28,9 +28,9 @@ public class QueueService {
     private DistributionSummary waitSummary;
 
     @Inject
-    public QueueService(MeterRegistry registry, Assistant assistant) {
+    public QueueService(MeterRegistry registry, ChatService chatService) {
         this.registry = registry;
-        this.assistant = assistant;
+        this.chatService = chatService;
     }
 
     @PostConstruct
@@ -85,7 +85,7 @@ public class QueueService {
             waitSummary.record(waitedMs);
 
             charsCount.withTag("direction", "outbound").increment(msg.prompt.length());
-            String response = processingTimer.record(() -> assistant.chat(1234, msg.prompt()));
+            String response = processingTimer.record(() -> chatService.answer(msg.prompt()));
             if (response != null) {
                 charsCount.withTag("direction", "inbound").increment(response.length());
             }
