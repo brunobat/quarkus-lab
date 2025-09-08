@@ -17,11 +17,11 @@ public class QueueService {
     private final Queue<Message> promptQueue = new ConcurrentLinkedQueue<>();
 
     private final MeterRegistry registry;
-    private final Assistant assistant;
+    private final ChatService chatService;
 
-    public QueueService(MeterRegistry registry, Assistant assistant) {
+    public QueueService(MeterRegistry registry, ChatService chatService) {
         this.registry = registry;
-        this.assistant = assistant;
+        this.chatService = chatService;
     }
 
     @PostConstruct
@@ -50,7 +50,7 @@ public class QueueService {
                 return Map.of("status", "empty queue");
             }
 
-            String response = assistant.chat(1234, msg.prompt());
+            String response = chatService.answer(msg.prompt());
 
             return Map.of("Question", msg, "Response", response);
         } catch (Exception e) {
