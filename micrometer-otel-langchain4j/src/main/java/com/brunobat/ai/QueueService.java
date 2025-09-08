@@ -1,8 +1,10 @@
 package com.brunobat.ai;
 
-import com.brunobat.ai.common.Assistant;
-import io.micrometer.core.instrument.*;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.DistributionSummary;
+import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Meter.MeterProvider;
+import io.micrometer.core.instrument.MeterRegistry;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -24,7 +26,6 @@ public class QueueService {
 
     private Counter processedCounter;
     MeterProvider<Counter> charsCount;
-    private Timer processingTimer;
     private DistributionSummary waitSummary;
 
     @Inject
@@ -42,16 +43,6 @@ public class QueueService {
 
         processedCounter = Counter.builder("demo.queue.processed")
                 .description("Total messages processed from the AI queue")
-                .register(registry);
-
-        charsCount = Counter.builder("demo.queue.chars")
-                .description("Size of processed AI request/responses (chars)")
-                .baseUnit("chars")
-                .withRegistry(registry);
-
-        processingTimer = Timer.builder("demo.queue.processing") // includes count, max, sum and percentiles
-                .description("Time to process a message with Assistant.chat")
-                .publishPercentiles(0.5, 0.9, 0.99, 0.999, 0.9999)
                 .register(registry);
 
         waitSummary = DistributionSummary.builder("demo.queue.wait")
@@ -85,7 +76,7 @@ public class QueueService {
             waitSummary.record(waitedMs);
 
             charsCount.withTag("direction", "outbound").increment(msg.prompt.length());
-            String response = processingTimer.record(() -> chatService.answer(msg.prompt()));
+            String response = chatService.answer(msg.prompt());
             if (response != null) {
                 charsCount.withTag("direction", "inbound").increment(response.length());
             }

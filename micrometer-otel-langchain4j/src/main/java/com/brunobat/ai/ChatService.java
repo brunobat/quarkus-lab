@@ -1,8 +1,11 @@
 package com.brunobat.ai;
 
 import com.brunobat.ai.common.Assistant;
-import io.micrometer.core.instrument.*;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.Meter.MeterProvider;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.Duration;
