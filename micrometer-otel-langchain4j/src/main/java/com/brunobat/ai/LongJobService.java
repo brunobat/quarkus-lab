@@ -1,5 +1,6 @@
 package com.brunobat.ai;
 
+import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.instrument.LongTaskTimer;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.quarkus.logging.Log;
@@ -30,6 +31,7 @@ public class LongJobService {
         this.executor = executor;
     }
 
+    @Counted
     public long startLongTask() {
         int id = jobIndex.getAndIncrement();
         LongTaskTimer.Sample sample = longTaskTimer.start();
