@@ -17,7 +17,6 @@ public class LongJobService {
     private final AtomicInteger jobIndex = new AtomicInteger(1);
 
     public LongJobService(MeterRegistry registry, @Named("customBusinessExecutor") ExecutorService executor) {
-
         this.executor = executor;
     }
 
