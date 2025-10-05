@@ -3,6 +3,7 @@ package com.brunobat.ai;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.Gauge;
+import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.Meter.MeterProvider;
 import io.micrometer.core.instrument.MeterRegistry;
 import jakarta.annotation.PostConstruct;
@@ -25,7 +26,7 @@ public class QueueService {
     private final MeterRegistry registry;
     private final ChatService chatService;
 
-    private Counter processedCounter;
+    private Meter.MeterProvider<Counter> processedCounter;
     private DistributionSummary waitSummary;
 
     @Inject
@@ -43,7 +44,7 @@ public class QueueService {
 
         processedCounter = Counter.builder("demo.queue.processed")
                 .description("Total messages processed from the AI queue")
-                .register(registry);
+                .withRegistry(registry);
 
         waitSummary = DistributionSummary.builder("demo.queue.wait")
                 .description("Time a message waited in queue before processing")
@@ -68,19 +69,21 @@ public class QueueService {
     public Map<String, Object> drainOne() {
         try {
             Message msg = promptQueue.poll();
-            if (msg == null) {
+            if(msg == null) {
                 return Map.of("status", "empty queue");
             }
 
-            long waitedMs = Duration.between(msg.createdAt(), Instant.now()).toMillis();
-            waitSummary.record(waitedMs);
+            long waited = Duration.between(msg.createdAt(), Instant.now()).toMillis();
+            waitSummary.record(waited);
 
-            String response = chatService.answer(msg.prompt());
+            Map<String, Object> result = Map.of("question", msg,
+                    "response", chatService.answer(msg.prompt()));
 
-            processedCounter.increment();
-            return Map.of("Question", msg, "Response", response);
+            processedCounter.withTag("status","success").increment();
+            return result;
         } catch (Exception e) {
-            return Map.of("popped", "failure" + e.getMessage());
+            processedCounter.withTag("status","failure").increment();
+            return Map.of("status", Map.of("failure with message: ", e.getMessage()));
         }
     }
 
