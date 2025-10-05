@@ -13,27 +13,16 @@ import java.util.concurrent.Executors;
 @ApplicationScoped
 public class ExecutorProducer {
 
-    private final MeterRegistry meterRegistry;
     private ExecutorService executor;
 
-    public ExecutorProducer(MeterRegistry meterRegistry) {
-        this.meterRegistry = meterRegistry;
+    public ExecutorProducer() {
     }
 
     @Produces
     @ApplicationScoped // there will be only one
     @Named("customBusinessExecutor")
     public ExecutorService executorService() {
-        ExecutorService exec = Executors.newFixedThreadPool(4);
-
-        // wrapper will keep an eye on the executor metrics
-        ExecutorServiceMetrics
-                .monitor(meterRegistry, exec,
-                        "business_executor",
-                        "demo.business");
-
-        this.executor = exec;
-        return exec;
+        return Executors.newFixedThreadPool(4);
     }
 
     @Shutdown
