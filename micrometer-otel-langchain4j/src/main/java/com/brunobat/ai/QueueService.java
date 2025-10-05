@@ -19,13 +19,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @ApplicationScoped
 public class QueueService {
 
+    // We will use it as a FIFO queue.
     private final Queue<Message> promptQueue = new ConcurrentLinkedQueue<>();
 
     private final MeterRegistry registry;
     private final ChatService chatService;
 
     private Counter processedCounter;
-    MeterProvider<Counter> charsCount;
     private DistributionSummary waitSummary;
 
     @Inject
@@ -75,11 +75,7 @@ public class QueueService {
             long waitedMs = Duration.between(msg.createdAt(), Instant.now()).toMillis();
             waitSummary.record(waitedMs);
 
-            charsCount.withTag("direction", "outbound").increment(msg.prompt.length());
             String response = chatService.answer(msg.prompt());
-            if (response != null) {
-                charsCount.withTag("direction", "inbound").increment(response.length());
-            }
 
             processedCounter.increment();
             return Map.of("Question", msg, "Response", response);
