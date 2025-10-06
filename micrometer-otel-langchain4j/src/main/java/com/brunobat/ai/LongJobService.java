@@ -31,7 +31,7 @@ public class LongJobService {
         this.tracer = tracer;
 
         this.longTaskTimer = LongTaskTimer.builder("demo.long.job")
-                .description("Long running operations (active+duration")
+                .description("Long running operations (queued+processed)")
                 .tag("job", "indexer")
                 .register(registry);
     }
