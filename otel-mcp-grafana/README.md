@@ -1,4 +1,4 @@
-# quarkus-mcp-telemetry
+# otel-mcp-grafana
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

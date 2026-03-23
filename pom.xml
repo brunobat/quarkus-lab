@@ -24,5 +24,10 @@
         <module>micrometer-otel</module>
         <module>otel-fault-tolerance</module>
         <module>micrometer-otel-langchain4j</module>
+        <module>otel-reactive-routes</module>
+        <module>micrometer-prometheus-multi-registry</module>
+        <module>otel-all-kube</module>
+        <module>otel-mutiny</module>
+        <module>otel-mcp-grafana</module>
     </modules>
 </project>
