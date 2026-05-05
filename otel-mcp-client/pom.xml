@@ -9,7 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>otel-mcp-grafana</artifactId>
+    <artifactId>otel-mcp-client</artifactId>
+    <name>otel-mcp-client</name>
 
     <properties>
         <compiler-plugin.version>3.15.0</compiler-plugin.version>
@@ -18,7 +19,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.34.1</quarkus.platform.version>
+        <quarkus.platform.version>3.35.2</quarkus.platform.version>
+        <quarkus-mcp-server.version>1.12.0</quarkus-mcp-server.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
     </properties>
@@ -45,11 +47,7 @@
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-micrometer-opentelemetry</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-jackson</artifactId>
+            <artifactId>quarkus-picocli</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkiverse.langchain4j</groupId>
@@ -57,13 +55,12 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-micrometer-opentelemetry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-observability-devservices-lgtm</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
@@ -72,6 +69,12 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkiverse.mcp</groupId>
+            <artifactId>quarkus-mcp-server-http</artifactId>
+            <version>${quarkus-mcp-server.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -89,7 +92,6 @@
                             <goal>build</goal>
                             <goal>generate-code</goal>
                             <goal>generate-code-tests</goal>
-                            <goal>native-image-agent</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -105,7 +107,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire-plugin.version}</version>
                 <configuration>
-                    <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
                     <systemPropertyVariables>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                         <maven.home>${maven.home}</maven.home>
@@ -124,10 +125,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
                     <systemPropertyVariables>
-                        <native.image.path>${project.build.directory}/${project.build.finalName}-runner
-                        </native.image.path>
+                        <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                         <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
@@ -145,7 +144,6 @@
                 </property>
             </activation>
             <properties>
-                <quarkus.package.jar.enabled>false</quarkus.package.jar.enabled>
                 <skipITs>false</skipITs>
                 <quarkus.native.enabled>true</quarkus.native.enabled>
             </properties>

@@ -1,0 +1,14 @@
+package org.acme;
+
+import jakarta.enterprise.context.RequestScoped;
+
+@RequestScoped
+public class TestCodeService {
+
+    public String assist(String language) {
+        return switch (language) {
+            case "java" -> "System.out.println(\"Hello world!\");";
+            default -> throw new IllegalArgumentException("Unexpected value: " + language);
+        };
+    }
+}
