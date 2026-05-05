@@ -1,2 +1,4 @@
 /micrometer-otel-langchain4j/target/
 /otel-aws-rosa/target/
+/otel-mcp-client/target/
+/otel-mcp-server/target/

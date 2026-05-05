@@ -29,5 +29,7 @@
         <module>otel-all-kube</module>
         <module>otel-mutiny</module>
         <module>otel-mcp-grafana</module>
+        <module>otel-mcp-server</module>
+        <module>otel-mcp-client</module>
     </modules>
 </project>
