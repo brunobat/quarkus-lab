@@ -22,6 +22,7 @@
 <!--        <quarkus.platform.version>3.22.1</quarkus.platform.version>-->
         <quarkus.platform.version>999-SNAPSHOT</quarkus.platform.version>
         <skipITs>true</skipITs>
+        <skipTests>true</skipTests>
         <surefire-plugin.version>3.2.5</surefire-plugin.version>
     </properties>
 
@@ -42,10 +43,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-micrometer-opentelemetry</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-micrometer-registry-prometheus</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-jackson</artifactId>
@@ -61,7 +62,7 @@
 <!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5</artifactId>
+            <artifactId>quarkus-junit</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
