@@ -22,6 +22,8 @@
         <module>micrometer-prometheus</module>
         <module>otel-tracing</module>
         <module>micrometer-otel</module>
+        <module>micrometer-otel-2-exporters</module>
+        <module>micrometer-otel-bootui</module>
         <module>otel-fault-tolerance</module>
         <module>micrometer-otel-langchain4j</module>
         <module>otel-reactive-routes</module>

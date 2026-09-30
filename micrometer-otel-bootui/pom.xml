@@ -9,8 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>micrometer-prometheus</artifactId>
-    <name>micrometer-prometheus</name>
+    <artifactId>micrometer-otel-bootui</artifactId>
+    <name>micrometer-otel-bootui</name>
 
     <properties>
         <compiler-plugin.version>3.12.1</compiler-plugin.version>
@@ -19,11 +19,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-<!--        <quarkus.platform.version>3.28.3</quarkus.platform.version>-->
-        <quarkus.platform.version>999-SNAPSHOT</quarkus.platform.version>
-<!--        <quarkus-micrometer-registry-otlp.version>3.2.4</quarkus-micrometer-registry-otlp.version>-->
+        <quarkus.platform.version>3.37.3</quarkus.platform.version>
+<!--        <quarkus.platform.version>999-SNAPSHOT</quarkus.platform.version>-->
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.2.5</surefire-plugin.version>
+        <bootui-quarkus.version>1.15.0</bootui-quarkus.version>
     </properties>
 
     <dependencyManagement>
@@ -39,9 +39,18 @@
     </dependencyManagement>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-opentelemetry</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-micrometer-opentelemetry</artifactId>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest</artifactId>
+            <groupId>com.julien-dubois.bootui</groupId>
+            <artifactId>bootui-quarkus</artifactId>
+            <version>${bootui-quarkus.version}</version>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -49,24 +58,11 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
-        </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-opentelemetry</artifactId>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-observability-devservices-lgtm</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit</artifactId>
+            <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
