@@ -2,12 +2,18 @@ package com.example;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static io.restassured.RestAssured.given;
 
+// Disabled: every test here calls /telemetry/* endpoints that proxy to a live Grafana
+// Tempo MCP server (quarkus.langchain4j.mcp.tempo.url=http://localhost:3200/api/mcp).
+// They assume the Grafana LGTM stack is already running; without it the MCP client fails
+// with "Connection refused: localhost:3200". Bring the stack up and remove @Disabled to run them.
+@Disabled("Requires a running Grafana LGTM/Tempo stack with an MCP server on localhost:3200")
 @QuarkusTest
 class TelemetryResourceTest {
 

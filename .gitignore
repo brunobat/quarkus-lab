@@ -2,3 +2,4 @@
 /otel-aws-rosa/target/
 /otel-mcp-client/target/
 /otel-mcp-server/target/
+/micrometer-otel-2-exporters/target/
