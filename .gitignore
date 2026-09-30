@@ -1,5 +1,4 @@
-/micrometer-otel-langchain4j/target/
-/otel-aws-rosa/target/
-/otel-mcp-client/target/
-/otel-mcp-server/target/
-/micrometer-otel-2-exporters/target/
+# Maven build output (all modules)
+target/
+/docs/superpowers/specs/2026-05-05-tempo-trace-analysis-skill-design.md
+/trace-cost-breakdown.md

@@ -13,7 +13,31 @@
         <!-- Aligned Quarkus platform version for all modules. Override locally in a module
              (e.g. uncomment its 999-SNAPSHOT line) for manual testing. -->
         <quarkus.platform.version>3.40.1</quarkus.platform.version>
+        <!-- Shared compiler config for all modules; override locally if a module needs it. -->
+        <compiler-plugin.version>3.16.0</compiler-plugin.version>
+        <maven.compiler.release>21</maven.compiler.release>
+        <surefire-plugin.version>3.6.0</surefire-plugin.version>
+        <!-- ITs are skipped by default for all modules; each module's native profile re-enables them. -->
+        <skipITs>true</skipITs>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- Quarkus BOM coordinates. group-id is left per-module (it varies: io.quarkus vs
+             io.quarkus.platform); this is only a default so the import below resolves here. -->
+        <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${quarkus.platform.group-id}</groupId>
+                <artifactId>${quarkus.platform.artifact-id}</artifactId>
+                <version>${quarkus.platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <modules>
         <module>otel-metrics-docs</module>
